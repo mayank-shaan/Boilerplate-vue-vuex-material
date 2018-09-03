@@ -9,6 +9,8 @@ import Shell from '@/components/layout/Shell';
 
 // views
 import Dashboard from '@/components/Dashboard';
+import Home from '@/components/Home';
+import Favourite from '@/components/Favourite';
 
 
 Vue.use(Router);
@@ -28,6 +30,30 @@ export default new Router({
       ],
     },
     {
+      path: '/',
+      component: Shell,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'home',
+          component: Home,
+          name: 'Home',
+        },
+      ],
+    },
+    {
+      path: '/',
+      component: Shell,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'favourite',
+          component: Favourite,
+          name: 'Favourite',
+        },
+      ],
+    },
+    {
       path: '*',
       component: Shell,
       meta: { requiresAuth: true },
@@ -35,7 +61,7 @@ export default new Router({
         {
           path: 'dashboard',
           component: Dashboard,
-          name: 'Dashboard',
+          name: 'Dashboard 2',
         },
       ],
     },

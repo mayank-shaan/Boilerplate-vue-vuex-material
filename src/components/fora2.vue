@@ -2,47 +2,43 @@
   <div>
     <v-card class="mood" tile>
       <v-card-title primary-title class="pb-0 mood-blur">
-        <div class="fora-heading">
-        <p class="text-justify mb-0">
-          {{pMood.title}}
-        </p>
-      </div>
-      </v-card-title>
-
-      <!-- Text/like Mood -->
-      <v-card-actions class="py-0">
-
-        <!-- Like/category -->
-        <v-container  grid-list-lg class="px-1 py-2">
-          <!-- Like -->
-          <v-layout row wrap>
-            <v-flex xs6 class="d-flex align-center pb-0">
-              <span class="flex-gr-1 text-xs-left">
+          <v-layout wrap justify-space-around>
+            <v-flex xs5 class="text-xs-left">
+              <span class="flex-gr-1 ">
                 <span class="font-weight-bold">
                   @{{pMood.user_name}}
                 </span>
-                  <p class="grey--text" style="font-size: 12px">
-                    {{pMood.reveal_time | moment("from", "now", true) }} left
-                  </p>
+                <p class="grey--text" style="font-size: 12px">
+                  {{pMood.reveal_time | moment("from", "now", true) }} left
+                </p>
               </span>
             </v-flex>
-            <v-flex xs6 class="d-flex align-center pb-0">
-              <v-chip  color="primary"  text-color="white" small>
-                <v-icon color="blue">home</v-icon>
-                &nbsp; category
-              </v-chip>
+            <v-flex xs5 class="text-xs-right">
+              <span class="flex-gr-1">
+                <span class="font-weight-bold green--text" v-if="pIndex%2 === 0">
+                  ${{pMood.recipients}} <v-icon color="green" small>lens</v-icon>
+                </span>
+                <span class="font-weight-bold grey--text" v-else>
+                  ${{pMood.recipients}}
+                </span>
+                <p class="grey--text" style="font-size: 12px">
+                  {{(Math.random() * (0.120 - 0.0200) + 0.0200).toFixed(4) }} ETH
+                </p>
+              </span>
             </v-flex>
           </v-layout>
-          <!-- category -->
 
-        </v-container>
-        <!-- End - Like/category -->
+      </v-card-title>
 
-      </v-card-actions>
-      <!-- End Text/like Mood -->
+      <div class="fora-heading">
+        <p class="text-justify mb-0 px-3">
+          {{pMood.title}}
+        </p>
+      </div>
+      <!-- Text/like Mood -->
 
       <!-- Bottom Bar -->
-      <v-card-actions class="mood-footer pa-1">
+      <v-card-actions class="mood-footer pa-1 pb-3">
         <v-container class="pa-0" >
           <v-layout row justify-space-around>
             <v-flex d-flex xs3 class="justify-content-center">
@@ -82,7 +78,7 @@
 <script>
 
 export default {
-  name: 'fora',
+  name: 'fora2',
   props: ['pMood', 'pIndex'],
   components: {},
   data: () => ({
