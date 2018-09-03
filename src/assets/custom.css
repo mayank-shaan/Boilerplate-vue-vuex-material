@@ -1,59 +1,11 @@
-.masonry-grid-item,
-.masonry-grid-sizer {
-  width: 250px;
-}
-
-.masonry-grid-item {
-  margin-bottom: 25px;
-}
-.mood {
-  font-family: 'Indie Flower', cursive;
-  width: 245px;
-  max-width: 245px;
-  border-radius: 30px;
-  -webkit-box-shadow: 10px 10px 20px 0px rgba(58, 58, 58, 0.25);
-          box-shadow: 10px 10px 20px 0px rgba(58, 58, 58, 0.25);
-}
-
-.mood .mood-footer button {
-  max-width: 28px;
-  max-height: 28px;
-}
-
-.mood .mood-footer button:hover i {
-  color: grey !important;
-}
-
-.mood .mood-footer i {
-  font-size: 22px;
-}
-
-.mood-detail-suggesstion {
-  white-space: wrap;
-  overflow: auto;
-  background-color: #fafafa;
-  padding: 10px 0px;
-}
-
-.mood-detail-suggesstion > div {
-  display: inline-block;
-  margin-right: 20px;
-  margin-top: 20px;
-  white-space: initial;
-  vertical-align: top;
-}
-
-@media screen and (min-width: 960px) {
-  .mood-detail-suggesstion {
-    white-space: nowrap;
-  }
-
-  .mood-detail-suggesstion > div {
-    margin-right: 20px;
-  }
-
-  .overflow-mood-comment {
-    height: 500px !important;
-    overflow: auto;
-  }
+.fora-heading {
+  margin: 1em 0px;
+  font-size: 130%;
+  font-weight: 500;
+  text-align: left;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  color: rgb(0, 0, 0);
+  word-wrap: break-word;
+  /* max-width: 213px; */
 }

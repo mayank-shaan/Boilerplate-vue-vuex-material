@@ -2,15 +2,15 @@
   <div>
     <v-card class="mood" tile flat>
       <v-card-title primary-title class="pb-0 mood-blur">
-        <div>
-          <p class="text-justify mb-0"
-          style="word-wrap: break-word; max-width: 213px;">{{pMood.message}}</p>
-        </div>
+        <div class="fora-heading">
+        <p class="text-justify mb-0">
+          {{pMood.message}}
+        </p>
+      </div>
       </v-card-title>
 
       <!-- Text/like Mood -->
       <v-card-actions class="py-0">
-
         <p class="flex-gr-1 text-xs-left pl-2 py-2 grey--text"
         style="font-size: 12px"> {{pMood.created_at}} </p>
 
@@ -38,6 +38,7 @@
 
               <v-chip color="primary"  text-color="white" small>
                 <v-icon color="blue">home</v-icon>
+                &nbsp; category
               </v-chip>
 
             </v-flex>
@@ -52,51 +53,38 @@
 
       <!-- Bottom Bar -->
       <v-card-actions class="mood-footer pa-1">
-
-        <v-container class="pa-0">
-          <v-layout row>
-
-            <!-- Comments -->
+        <v-container class="pa-0" >
+          <v-layout row justify-space-around>
             <v-flex d-flex xs3 class="justify-content-center">
               <span
               class="disqus-comment-count grey--text"
-              data-disqus-url="#" style="flex-grow: 0;text-align: right;"></span>
-              <v-btn icon @click="openMoodDetail()"  >
-                <v-icon color="grey lighten-3">question_answer</v-icon>
-              </v-btn>
-            </v-flex>
-            <!-- End Comments -->
-
-            <!-- Edit / Cancel  -->
-            <v-flex d-flex xs6 class="justify-content-center">
-              <v-btn icon @click="activeEditMoodModal()"   v-if="true">
-                <v-icon color="grey lighten-3">mode_edit</v-icon>
-              </v-btn>
-
-              <v-btn icon @click.native="deleteModal = true"   v-if="false">
-                <v-icon color="grey lighten-3">delete_forever</v-icon>
-              </v-btn>
-            </v-flex>
-            <!-- End Edit / Cancel -->
-
-            <!-- Report -->
-            <v-flex d-flex xs3 class="justify-content-center">
+              data-disqus-url="#" style="flex-grow: 0;">18</span>
               <v-btn v-if="!pMood.reported" icon @click="reportModal = true">
-                <v-icon color="grey lighten-3">flag</v-icon>
+                <v-icon color="secondary lighten-3">supervised_user_circle </v-icon>
               </v-btn>
-              <v-tooltip bottom  v-if="pMood.reported" style="text-align:center">
-                <v-btn icon slot="activator" >
-                  <v-icon color="red lighten-3">flag</v-icon>
-                </v-btn>
-                <span>Mood not showed. Too many report receved</span>
-              </v-tooltip>
             </v-flex>
-            <!-- End Report -->
+            <v-flex d-flex xs3 class="justify-content-center">
+              <span
+              class="disqus-comment-count grey--text"
+              data-disqus-url="#" style="flex-grow: 0;">23</span>
+              <v-btn icon @click="activeEditMoodModal()"   v-if="true">
+                <!-- <font-awesome-icon icon="times"
+                class="lighten-3" :style="{ color: 'grey' }"/> -->
+                <v-icon color="secondary lighten-3">compare_arrows</v-icon>
+              </v-btn>
+            </v-flex>
+            <v-flex d-flex xs3 class="justify-content-center">
+              <span
+              class="disqus-comment-count grey--text"
+              data-disqus-url="#" style="flex-grow: 0;">50</span>
+              <v-btn icon @click="openMoodDetail()"  >
+                <v-icon color="secondary lighten-3">question_answer</v-icon>
+              </v-btn>
+            </v-flex>
           </v-layout>
         </v-container>
-
       </v-card-actions>
-      <!-- End - Bottom Bar -->
+
     </v-card>
   </div>
 </template>

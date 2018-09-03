@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import Vuex from 'vuex';
-import Masonry from '../node_modules/masonry-layout/dist/masonry.pkgd';
+import VueMasonry from 'vue-masonry-css';
 
 import App from './App';
 import router from './router';
@@ -19,7 +19,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuetify, {});
 Vue.use(Vuex);
-window.Masonry = Masonry;
+Vue.use(VueMasonry);
 
 /* eslint-disable no-new */
 new Vue({
