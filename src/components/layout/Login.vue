@@ -4,71 +4,76 @@
     <section class="user" v-show="refreshing" :class="{'refreshing' : disabled}">
       <div class="user_options-container">
         <div class="user_options-text">
+
           <div class="user_options-unregistered">
-            <h2 class="user_unregistered-title">Don't have an account?</h2>
-            <p class="user_unregistered-text">If you dont have an account, contact our sales team and get started.</p>
-            <button class="user_unregistered-signup" id="signup-button" @click="toggle('contactSales')" >contact sales team</button>
+            <h2 class="user_unregistered-title">
+              Don't have an account?
+            </h2>
+            <p class="user_unregistered-text">
+              If you dont have an account, signup right now and get started.
+            </p>
+            <button class="user_unregistered-signup" id="signup-button" @click="toggle('contactSales')" >
+              Sign Up
+            </button>
           </div>
 
           <div class="user_options-registered">
             <h2 class="user_registered-title">Have an account?</h2>
-            <p class="user_registered-text">enter your details and login for the awesomeness.</p>
+            <p class="user_registered-text">enter your details and login.</p>
             <button class="user_registered-login" @click="toggle('login')">Login</button>
           </div>
+
         </div>
 
         <div class="user_options-forms" v-bind:class="{'signup-click' : loginActive , 'login-click' : !loginActive }" id="user_options-forms">
-          <div class="user_forms-login">
-            <!-- <img class="mb-4"src="../../assets/logo/logo_colored.png" alt=""> -->
-            <!-- <h2 class="forms_title">Login</h2> -->
+
+          <!-- Login Page -->
+          <div class="user_forms-login pt-5">
             <form class="forms_form" v-if="!forgotPasswordToggle" v-on:submit.prevent="login">
-              <fieldset class="forms_fieldset">
                 <div class="forms_field">
                   <input type="email" maxlength='100' placeholder="Email" v-model="email" class="forms_field-input" required autofocus />
                 </div>
                 <div class="forms_field">
                   <input type="password" maxlength='100' placeholder="Password" v-model="password" class="forms_field-input" required />
                 </div>
-              </fieldset>
               <div class="forms_buttons">
                 <button type="button" class="forms_buttons-forgot" @click="fpToggle">Forgot password?</button>
                 <input type="submit" value="Log In" class="forms_buttons-action">
               </div>
             </form>
             <form class="forms_form mt-4" v-if="forgotPasswordToggle" v-on:submit.prevent="forgot">
-              <fieldset class="forms_fieldset">
                 <div class="forms_field">
                   <input type="email" placeholder="Enter you email address" v-model="forgotEmail" class="forms_field-input" required autofocus />
                 </div>
-              </fieldset>
               <div class="forms_buttons">
                 <button type="button" class="forms_buttons-forgot" @click="fpToggle">Login</button>
                 <input type="submit" value="Send password reset link" class="forms_buttons-action">
               </div>
             </form>
           </div>
+
+          <!-- signup Page -->
           <div class="user_forms-signup">
             <h2 class="forms_title mb-2">Fill your details</h2>
-            <form class="forms_form" v-on:submit.prevent="contactSalesTeam();">
-              <fieldset class="forms_fieldset">
+            <form class="forms_form" v-on:submit.prevent="signUpAction();">
                 <div class="forms_field">
-                  <input type="text" maxlength='50' placeholder="Full Name" v-model='contactSales.requester_name' class="forms_field-input" required />
+                  <input type="text" maxlength='50' placeholder="Full Name" v-model='signUp.requester_name' class="forms_field-input" required />
                 </div>
                 <div class="forms_field">
-                  <input type="email" maxlength='50' placeholder="Email" v-model='contactSales.email' class="forms_field-input" required />
+                  <input type="email" maxlength='50' placeholder="Email" v-model='signUp.email' class="forms_field-input" required />
                 </div>
                 <div class="forms_field">
-                  <input type="text" maxlength='18' placeholder="Contact Number" v-model='contactSales.contact_phone' class="forms_field-input" required />
+                  <input type="text" maxlength='18' placeholder="Contact Number" v-model='signUp.contact_phone' class="forms_field-input" required />
                 </div>
                 <div class="forms_field">
-                  <input type="text" maxlength='80' placeholder="Company" v-model='contactSales.company_name' class="forms_field-input" required />
+                  <input type="text" maxlength='80' placeholder="Company" v-model='signUp.company_name' class="forms_field-input" required />
                 </div>
-              </fieldset>
               <div class="forms_buttons">
-                <input type="submit" value="Contact" class="forms_buttons-action">
+                <input type="submit" value="Sign Up" class="forms_buttons-action">
               </div>
             </form>
           </div>
+
         </div>
       </div>
     </section>
@@ -79,7 +84,7 @@
 /* eslint-disable*/
 
 export default {
-  name: 'Login',
+  name: 'login',
   data() {
     return {
       disabled: false,
@@ -89,7 +94,7 @@ export default {
       forgotEmail: null,
       refreshing: false,
       password: null,
-      contactSales: {
+      signUp: {
         requester_name: '',
         email: '',
         contact_phone: '',
@@ -101,12 +106,13 @@ export default {
   methods: {
     login() {
       if (this.email && this.password) {
-        this.getData();
+        this.getDataTemp();
       }
     },
-    contactSalesTeam() {
+    signUpAction() {
       /* eslint-disable no-unreachable */
-      this.$http.post(`${process.env.BASE_URL}support/ticket/website`, this.contactSales).then(() => {
+      this.$http.post(`${process.env.BASE_URL}support/ticket/website`, this.signUp)
+      .then(() => {
         this.$notify({
           group: 'foo',
           title: 'We have received your details, Someone from our team will contact you soon!',
@@ -159,15 +165,15 @@ export default {
         this.loginActive = !this.loginActive;
       }
     },
+    getDataTemp(){
+      this.$router.push('/home');
+    },
     getData() {
-      this.$Progress.start();
-      this.$Progress.set(70);
       this.disabled = true;
       this.$http.post(process.env.API_URL, {
         username: this.email,
         password: this.password,
       }).then((response) => {
-        // this.$Progress.finish();
         this.refreshing = true;
         if (response.body && response.body.status === 200) {
           // If first time login
@@ -194,7 +200,6 @@ export default {
         } else {
           this.disabled = false;
           this.refreshing = true;
-          this.$Progress.fail();
           this.$notify({
             group: 'foo',
             title: 'Error while logging in!',
@@ -220,7 +225,6 @@ export default {
       this.password = atob(this.$route.query.p);
       this.getData();
     } else {
-      // this.$Progress.finish();
       this.refreshing = true;
     }
   },

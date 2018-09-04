@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app light id="inspire">
     <v-navigation-drawer
       :clipped="$vuetify.breakpoint.lgAndUp"
       v-model="drawer"
@@ -63,6 +63,17 @@
             </v-list-tile-content>
           </v-list-tile>
         </template>
+        <v-list-tile  @click="handelLogout()">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Logout
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <!-- <v-layout align-end justify-start fill-height/> -->
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -227,6 +238,9 @@ export default {
   methods: {
     handelClick(child) {
       this.$router.push(child.text);
+    },
+    handelLogout() {
+      this.$router.push('login');
     },
   },
   mounted() {},

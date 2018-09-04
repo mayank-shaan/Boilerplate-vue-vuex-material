@@ -5,7 +5,7 @@
   text-align: center;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  color: rgb(0, 0, 0);
+  /* color: rgb(0, 0, 0); */
   word-wrap: break-word;
   /* max-width: 213px; */
 }

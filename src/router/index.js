@@ -8,6 +8,8 @@ import Router from 'vue-router';
 import Shell from '@/components/layout/Shell';
 
 // views
+import Login from '@/components/layout/Login';
+import PageNotFound from '@/components/layout/PageNotFound';
 import Dashboard from '@/components/Dashboard';
 import Home from '@/components/Home';
 import Favourite from '@/components/Favourite';
@@ -19,6 +21,18 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'login',
+      component: Login,
+      children: [
+        {
+          path: 'login',
+          component: Login,
+          name: 'Login',
+        },
+      ],
+    },
+    {
+      path: '/',
       component: Shell,
       meta: { requiresAuth: true },
       children: [
@@ -27,25 +41,11 @@ export default new Router({
           component: Dashboard,
           name: 'Dashboard',
         },
-      ],
-    },
-    {
-      path: '/',
-      component: Shell,
-      meta: { requiresAuth: true },
-      children: [
         {
           path: 'home',
           component: Home,
           name: 'Home',
         },
-      ],
-    },
-    {
-      path: '/',
-      component: Shell,
-      meta: { requiresAuth: true },
-      children: [
         {
           path: 'favourite',
           component: Favourite,
@@ -55,15 +55,8 @@ export default new Router({
     },
     {
       path: '*',
-      component: Shell,
-      meta: { requiresAuth: true },
-      children: [
-        {
-          path: 'dashboard',
-          component: Dashboard,
-          name: 'Dashboard 2',
-        },
-      ],
+      name: 'PageNotFound',
+      component: PageNotFound,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
