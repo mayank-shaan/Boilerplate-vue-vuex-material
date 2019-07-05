@@ -1,7 +1,6 @@
 # fora
 
 > It aims to provide clean, semantic and reusable components that make building your application a breeze.
-> [live demo](http://msdmsd.surge.sh)
 
 ## Build Setup
 
